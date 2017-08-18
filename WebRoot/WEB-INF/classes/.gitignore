@@ -1,0 +1,10 @@
+/advice/
+/applicationContext.xml
+/dao/
+/log4j.properties
+/mapper/
+/mybatis-config.xml
+/pojo/
+/proxy/
+/service/
+/util/
