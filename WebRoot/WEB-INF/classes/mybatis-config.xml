@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- 在properties元素中直接配置property属性 -->
+	<properties>
+		<property name="driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+		<property name="url" value="jdbc:sqlserver://192.168.61.140:1433;DatabaseName=jsp"/>
+		<property name="user" value="Lilac"/>
+		<property name="password" value="DB2017db"/>
+	</properties>
+	
+	<!-- 设置MyBatis的行为 -->
+	<!-- <settings> -->
+		<!-- 设置resultMap的自动映射为NONE(禁止自动映射) -->
+		<!-- <setting name="autoMappingBehavior" value="NONE"/> -->
+		<!-- <setting name="autoMappingBehavior" value="FULL"/> -->
+	<!-- </settings> -->
+	
+	<!-- 为实体类写别名，方便在配置文件中使用 -->
+	<typeAliases>
+		<typeAlias alias="User" type="pojo.User"/>
+	</typeAliases>
+	
+	<!-- 配置mybatis的多套运行环境 -->
+	<environments default="msserver">
+		<environment id="msserver">
+			<!-- 配置事务管理，采用JDBC的事务管理 -->
+			<transactionManager type="JDBC"></transactionManager>
+			<!-- 配置数据源，采用mybatis自带的数据源：POOLED -->
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}"/>
+				<property name="url" value="${url}"/>
+				<property name="username" value="${user}"/>
+				<property name="password" value="${password}"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- 将mapper文件加入到配置文件中 -->
+	<mappers>
+		<mapper resource="mapper/UserMapper.xml"/>
+	</mappers>
+</configuration>
